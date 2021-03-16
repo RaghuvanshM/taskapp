@@ -11,7 +11,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { format } from 'date-fns';
 import { nameregex, mobileregex, notempty } from '../../component/constants';
 import styles from './style';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { showMessage, hideMessage } from "react-native-flash-message";
 class RegistrationScreen extends Component {
     constructor(props) {
         super(props)
@@ -155,7 +156,10 @@ class RegistrationScreen extends Component {
         }
     }
     onButtonSubmit = () => {
-        console.log(this.state)
+        showMessage({
+            message: "Submit button press",
+            type: "success",
+          });
     }
     render() {
         let { isVisible, menubrandccolor,
@@ -194,8 +198,9 @@ class RegistrationScreen extends Component {
             },
         };
         let allsource = ['red', 'blue', 'yellow', 'green']
-        const eye = (
+        const arrowdown = (
             <TextInput.Icon name="arrow-down-thick" size={25} color={'#C22D0D'}
+            onPress={() => this.setState({ menubrandccolor: true })}
             />
         )
         const alert = (
@@ -308,7 +313,7 @@ class RegistrationScreen extends Component {
                             disabled={true}
                             mode='outlined'
                             value={modalcolor}
-                            right={eye}
+                            right={arrowdown}
                             style={styles.textinput}
                         />
                         <Menu
